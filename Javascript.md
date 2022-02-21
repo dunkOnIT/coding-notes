@@ -1,6 +1,26 @@
 # INBOX
+* windows clipboard history: `Win+V`
+* running unsigned powershell scripts:
+  * run powershell as admin
+  * `Unblock-File <filename> 
 * `window.getComputedStyle(block).backgroundColor`
+* log how I added event listeners to the table
 * Good video on arrays I should check out ("Wes Bos Array Cardio" - https://www.youtube.com/watch?v=HB1ZC7czKRs&t=233s)
+
+
+
+
+
+# GIT/GITHUB
+* **branch management:**
+  * create and switch to a new branch with `git checkout -b <branch-name>`
+  * switch to an existing branch with `git checkout <branch-name>`
+  * merge a branch:
+    1. commit and push all changes
+    1. switch into the branch you would like to merge into 
+    1. verify in correct branch
+    2. `git merge <branch-to-be-merged>`
+
 
 # JAVASCRIPT
 
@@ -35,6 +55,22 @@
   * rounding: `Math.round(num * 10) / 10`
   * random number: Where max is the number of random numbers you want to generate 
     `Math.floor(Math.random() * max)`
+* **Imports/Exports and multi-file projects:**
+  * syntax
+    ```jsx
+    // Importing stuff
+    import * as name from "module-name"; // import everything from a module
+    import { export1 , export2 } from "module-name"; // import specific functions from a module - presumably this works for classes as well
+
+    // Exporting stuff
+    export function() { // Best way is just to prefix everything with export
+      do.stuff();
+    } 
+
+    export {sayHi as hi, sayBye as bye}; // If you wnat to simplify names you can declare exports at the end using this pattern
+    ``` 
+  * MASSIVE discussion of JS design patterns: https://softwareengineering.stackexchange.com/questions/180585/are-there-any-oo-principles-that-are-practically-applicable-for-javascript
+  * MDN full reference article: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import 
 
 <hr>
 <br>
@@ -202,6 +238,19 @@ This page has links to a lot of different resources explaning stuff like the net
     * at start: `array.unshift()`
   * change elements: `array[x] = "new value"`
   * concat two arrays: `newArray = array1.concat(array2, array3, "value4")`
+  * copy values from array (not reference): `let copyArray = [...originalArray]`
+* Custom functions
+  * shuffleArray(array): 
+      ```jsx
+      function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+          }
+      }
+      ```
   
 <br><hr>
 
@@ -322,13 +371,41 @@ This page has links to a lot of different resources explaning stuff like the net
       ```
   * adding html content
       ```jsx
-      div.innerHTML = '<span>Hello World!</span>';                   
-      // renders the HTML inside div
+      div.innerHTML = '<span>Hello World!</span>'; // overwrites element's inner htmlContent with the specified html 
+      div.innerHTML += '<span>Hello World!</span>'; // appends specified html string to element's content 
       ```
 
 
 
 ## **== OBJECTS ==**
+
+* classes 
+  * detailed guide here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+  * access any defined properties with `.` notation (remember, this is basically just an object)
+  * syntax
+     ```jsx
+     class Rectangle {
+        height = 0;
+        width;
+      constructor(height, width) {
+        this.height = height;
+        this.width = width;
+      }
+      // Getter
+      get area() {
+        return this.calcArea();
+      }
+      // Method
+      calcArea() {
+        return this.height * this.width;
+      }
+    }
+    ```
+    * specify properties before constructor to make "field declarations", which I'm pretty sure make those properties visible to an IDE
+    * doesn't seem necessary to use a variable keyword (like `let`) when declaring properties
+    * propertiescan be made private with `#` NOTE: not sure what "private" really means in this context 
+  * adding methods
+    * 
 
 ## **== EVENTS ==**
 
@@ -390,3 +467,53 @@ This page has links to a lot of different resources explaning stuff like the net
 
 ## **== SEMANTIC HTML ==**
   * Link to semantic html elements: https://www.w3schools.com/html/html5_semantic_elements.asp 
+
+
+
+# STATIC-SITE GENERATORS
+
+## HEXO
+
+* **installation and setup**
+  * to install: `npm install hexo` (full docs: https://hexo.io/docs/#Install-Hexo)
+  * to setup site: 
+    ```bash
+    hexo init <folder>
+    cd <folder>
+    npm install
+    ```
+* **directory overview**
+  * layout:
+    ```
+    .
+    ├── _config.yml
+    ├── package.json
+    ├── scaffolds
+    ├── source
+    |   ├── _drafts
+    |   └── _posts
+    └── themes 
+    ```
+  * elements:
+    * `config.yml`: configuration file, see (docs)[https://hexo.io/docs/configuration]
+    * `package.json`: standard Node stuff
+    * `scaffolds`: when a new post is created, Hexo bases the new file on the scaffold (base page layout, basically)
+    * `source`: this is where site content goes.
+      * hidden files, and files/folders prefixed with `_` are ignored - except for `_posts`
+      * renderable posts (HTML/.md) will be processed and put into `public` folder on generation, others will simply be copied 
+    * `themes`: affects rendering and layout
+* **configuration**
+  * 
+* **github pages deployment**
+  * follow the steps defined in the documentation: https://hexo.io/docs/github-pages#One-command-deployment
+    * this essentially creates an automated workflow that builds the Hexo site from the uploaded github project. The site is built on a `gh-pages` branch, which the workflow creates automatically.
+  * edit the `url` field in `config.yml` to be the URL supplied by Github Pages
+  * change the pages generation branch to `gh-pages`
+* **running**
+  * `hexo generate` to build static files
+  * `hexo server` to start local server 
+  * `hexo deploy -g` generates and deploys website (not sure what `deploy` means yet)
+* **troubleshooting**
+  * "Cannot read property 'nodes' of undefined"
+    * Caused by having `#` in the filepath - removed that and it was fixed. 
+# STUFF
