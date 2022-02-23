@@ -1,0 +1,214 @@
+# General
+
+- **PIP**
+    - install from requirements.txt: `pip install -r requirements.txt`  
+- **CLASSES**
+    ```python
+    # Create class
+    
+    class DogClass:
+    	# Use init to set up stuff when the class is initialised
+    	def __init__(self, breed) #Specify args in the init class which can be passed when 
+    														#the class is called
+    		self.breed = breed
+    		self.some_value = self.class_function_1 # Always specify self. when referencing
+    																						# a class function
+    
+    	def class_function_1(self) # You always need to specify self as an argument
+    		return "a"
+    ```
+    - [Here’s something on docstrings](https://www.programiz.com/python-programming/docstrings)
+- **ENVIRONMENT VARIABLES**
+    - [Artcile on how to set environment variables with python](https://able.bio/rhett/how-to-set-and-get-environment-variables-in-python--274rgt5) 
+- **LOGGING**
+    - [Socratica video explaning the basics](https://www.youtube.com/watch?v=g8nQ90Hk328)
+    - [Documentation](https://docs.python.org/3/howto/logging.html#logging-basic-tutorial)
+        - [A simple example](https://docs.python.org/3/howto/logging.html#a-simple-example)
+        - [Logging to a file](https://docs.python.org/3/howto/logging.html#logging-to-a-file)
+        - [Logging from multiple modules](https://docs.python.org/3/howto/logging.html#logging-from-multiple-modules)
+            - [StackExchange Thread](https://stackoverflow.com/questions/15727420/using-logging-in-multiple-modules)
+        - [Logging variable data](https://docs.python.org/3/howto/logging.html#logging-variable-data)
+        - [Changing the format of displayed messages](https://docs.python.org/3/howto/logging.html#changing-the-format-of-displayed-messages)
+            - [Full list of format variables](https://docs.python.org/3/library/logging.html#logrecord-attributes)
+        - [Displaying the date/time in messages](https://docs.python.org/3/howto/logging.html#displaying-the-date-time-in-messages)
+- **STRING MANIPULATION**
+    - string.find(”string”)
+        - `string.find(value, start, end)`
+            - *`start` and `end` are optional, default to 0 and end of string respectively*
+        - returns
+            - first occurrence of “string”
+            - -1 if not found
+        - alternative: string.index(), but index() raises an exception if value not found
+        
+        ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/44d251ed-f780-438b-9d77-b2ea6ce1a84b/Untitled.png)
+        
+    - string.replace(”target”, “replace_value”)
+- **DATETIME**
+    - String formatting
+        
+        Format a datetime object as follows:
+        
+        ```python
+        from datetime import datetime
+        
+        now = datetime.now()
+        now_string = now.strftime("%Y-%m-%d %H.%M.%S") # gives "2022-01-06 13.25.22"
+        ```
+        
+    - Get current time
+        
+        ```python
+        from datetime import datetime
+        
+        now = datetime.now()
+        ```
+        
+
+        
+- **WORKING WITH FILES**
+    - [Moving files](https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python): `shutil.move(current_path, new_path)`
+        - Note that filename must be included in the path, and if it is changed in new path then file will also be renamed
+    - [Listing contents of a directory:](https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory) **`[os.listdir()](https://docs.python.org/2/library/os.html#os.listdir)`**
+        - Narrow down to just files using `os.path.isfile(path)`
+            ```python
+            import os
+            
+            my_path = "example/path"
+            
+            directory_contents = os.listdir(my_path)
+            files_only = []
+            
+            for contents in directory_contents:
+            	combined_path = os.path.join(my_path, contents)
+            	if(os.path.isfile(combined_path)):
+            		files_only.append(combined_path)
+            
+            ```
+    - Writelines with newlines: `writelines("%s\n" % t for t in texts)`
+
+- **PATHLIB**
+    - documentation: https://docs.python.org/3/library/pathlib.html#concrete-paths
+    - `import pathlib`
+    - create a path object with `p = Path("filename.py") 
+        - paths don't have to be full paths or have slashes or anything
+    - joining: 
+        - `Path.joinpath(path_object)` joins paths in the order they are specified (can be given either a path object or a string, and supports multiple arguments) 
+        ```bash
+        PurePosixPath('/etc').joinpath('init.d', 'apache2')
+        PurePosixPath('/etc/init.d/apache2')
+        ```
+- **DESIGN PRINCIPLES**
+    - When to use functions vs a class: Basically, if they share state/data
+        
+        > Note that there might be good reasons that all (or perhaps some groups) of your [functions] should be in a class, perhaps some shared state for a set of related operations, or other reasons. I'd probably *start* with just functions, and then be on the lookout for collection of functions that commonly operate on the same data in some way.
+        > 
+    - When to split stuff up into multiple files: Basically, when a file or a class has too many responsibilities.
+- ~ RANDOM NOTES ~
+    - sys.stdout is basically just the console - but I think it can be provided as a file-like object (ie, in place of a file path). But I’m not 100% sure on that.
+    - For checking type you can use either type() to get the type, and then isinstance(test_obj, type) to check if something is/isn’t the given object type. To specify the object type, import the given module and then specify the path to the class, as in the below code:
+        
+        ```python
+        import requests
+        
+        type(requests.PreparedRequest)
+        ```
+        
+    - this is a cool wiki: [https://geekfeminism.fandom.com/wiki/Nonsexist_language](https://geekfeminism.fandom.com/wiki/Nonsexist_language)
+        
+        
+- **JSON**
+    - To load a dict from json:
+    
+    ```python
+    f = open('data.json',)
+       
+    # returns JSON object as 
+    # a dictionary
+    data = json.load(f)
+    ```
+    
+    - To save to a file already formatted, use “indent=4” like this:
+    
+    ```python
+    with open("json_dump, "w+") as outfile:
+    	json.dump(some_dict, outfile, indent=4) # "indent=4" stops it from saving as one line
+    ```
+    
+- **SELENIUM**
+    - [WebElement docs](https://www.selenium.dev/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html?highlight=webelement#selenium.webdriver.remote.webelement)
+    - Get an element: `driver.find_element_by_<method>`
+    - Get element’s text: `element.text`
+
+# HTTP/Web Stuff
+
+- **REQUESTS**
+    - [PreparedRequest docs](https://docs.python-requests.org/en/latest/api/#requests.PreparedRequest)
+        ```python
+        import requests
+        
+        req = requests.Request('GET', 'https://httpbin.org/get')
+        r = req.prepare()
+        
+        s = requests.Session()
+        s.send(r)
+        ```
+        
+    - [Response object docs](https://www.w3schools.com/python/ref_requests_response.asp)
+        - Use response.status_code to get the status code as an int
+- **FLASK (TODO)**
+    - [Documentation on flask.Request object](https://flask.palletsprojects.com/en/2.0.x/api/#flask.Request.args)
+        - Note that the type of flask.Request will be werkzeug.local.LocalProxy
+            - This is basically just a proxy object (exists for some complicated reasons), but basically it just passes on whatever you ask it to do to the flask.Request object - so you can treate it as flask.Request for all intents and purposes
+    - [Execute function after sending response](https://stackoverflow.com/questions/48994440/execute-a-function-after-flask-returns-response)
+- .**WEBSERVER (WAITRESS)**
+    - to start waitress server, run: `"waitress-serve --port=8080 app:app"`
+
+
+# Testing
+
+## **== GENERAL ==**
+- Terminology 
+  - Unit test: Testing a single component/function at a time
+  - Integration test: Testing multiple components together/simultaneously
+  - Test runner: Tool that helps to run multiple tests at once and summarise/report the results. `unittest` in Python standard library.
+- built-in assert statement: `assert <function output> == <expected output>`
+  - Returns an Error if false, and nothing if true
+
+## **== UNIT TESTS==**
+
+- **UNITTEST**
+  - `import unittest`
+  - tests go into a class as methods
+    - uses `assertEqual(<test_statement>, <expected_result>, <error text>)`
+    ```python
+    import unittest
+
+    class TestSum(unittest.TestCase):
+
+        def test_sum(self):
+            self.assertEqual(sum([1, 2, 3]), 6, "Should be 6")
+
+        def test_sum_tuple(self):
+            self.assertEqual(sum((1, 2, 2)), 6, "Should be 6")
+
+    if __name__ == '__main__':
+        unittest.main()
+    ```
+  - Failure indicated by `F`, success indicated by `.`.
+  - Note use of `unittest.main()` in main function - this causes tests to  run if script called from commandline
+  - Testing whether an exception is raised:
+    ```python
+    with self.assertRaises(TypeError):
+        sum() 
+    ```
+
+# Error Troubleshooting
+
+- **PYTHON GENERAL**
+    - `[Errno 2] No such file or directory:` in response to:
+        
+        ```python
+        logging.basicConfig(filename="logs/" + log_filename)
+        ```
+        
+        This was because I had to create the logs subfolder in my current directory before a file could be created in there. Issue WASN’T that the script couldn’t create a new file (ie, removing `“logs/”` gives working code.
