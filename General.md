@@ -1,3 +1,6 @@
+# MARKDOWN
+* markdown table converter: https://tableconvert.com/
+
 # GIT/GITHUB
 
 - FIRST-TIME CONFIG
@@ -34,7 +37,7 @@
         - Horizontally: `Ctrl+A, |`
         - Vertically: `Ctrl+A, S`
         - Change between splits: `Ctrl+A, Tab`
-    - Create a new screen within a session: `Ctrl+A, C`
+    - Create a new screen within a session: `Ctrl+A, c`
     - Cycle between screens: `Ctrl+A, N` for next, `Ctrl+A, P` for previous
     - [Good discussion on saving layouts](https://superuser.com/questions/687348/how-to-persist-gnu-screen-layout-after-restart)
         - Basically, `Ctrl+A, :layout save default`

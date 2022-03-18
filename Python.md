@@ -2,6 +2,8 @@
 
 - **PIP**
     - install from requirements.txt: `pip install -r requirements.txt`  
+    - create requirements.txt: pipreqs
+        - `pip install pipreqs` if that doesn't work
 - **CLASSES**
     ```python
     # Create class
@@ -66,7 +68,7 @@
 
         
 - **WORKING WITH FILES**
-    - [Moving files](https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python): `shutil.move(current_path, new_path)`
+    - [Moving files](ons/8858008/how-to-move-a-file-in-python): `shutil.move(current_path, new_path)`
         - Note that filename must be included in the path, and if it is changed in new path then file will also be renamed
     - [Listing contents of a directory:](https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory) **`[os.listdir()](https://docs.python.org/2/library/os.html#os.listdir)`**
         - Narrow down to just files using `os.path.isfile(path)`
@@ -86,6 +88,42 @@
             ```
     - Writelines with newlines: `writelines("%s\n" % t for t in texts)`
 
+- **RAISING EXCEPTIONS**
+    - raise generic error: `raise Exception("Error description text")` 
+    - raise specific error type: `raise <ErrorName>("Error description text")`
+    - list of error types: https://www.tutorialsteacher.com/python/error-types-in-python
+        |  Exception           | Description                                                                                             |
+        |----------------------|---------------------------------------------------------------------------------------------------------|
+        | AssertionError       | Raised when the assert statement fails.                                                                 |
+        | AttributeError       | Raised on the attribute assignment or reference fails.                                                  |
+        | EOFError             | Raised when the input() function hits the end-of-file condition.                                        |
+        | FloatingPointError   | Raised when a floating point operation fails.                                                           |
+        | GeneratorExit        | Raised when a generator's close() method is called.                                                     |
+        | ImportError          | Raised when the imported module is not found.                                                           |
+        | IndexError           | Raised when the index of a sequence is out of range.                                                    |
+        | KeyError             | Raised when a key is not found in a dictionary.                                                         |
+        | KeyboardInterrupt    | Raised when the user hits the interrupt key (Ctrl+c or delete).                                         |
+        | MemoryError          | Raised when an operation runs out of memory.                                                            |
+        | NameError            | Raised when a variable is not found in the local or global scope.                                       |
+        | NotImplementedError  | Raised by abstract methods.                                                                             |
+        | OSError              | Raised when a system operation causes a system-related error.                                           |
+        | OverflowError        | Raised when the result of an arithmetic operation is too large to be represented.                       |
+        | ReferenceError       | Raised when a weak reference proxy is used to access a garbage collected referent.                      |
+        | RuntimeError         | Raised when an error does not fall under any other category.                                            |
+        | StopIteration        | Raised by the next() function to indicate that there is no further item to be returned by the iterator. |
+        | SyntaxError          | Raised by the parser when a syntax error is encountered.                                                |
+        | IndentationError     | Raised when there is an incorrect indentation.                                                          |
+        | TabError               | Raised when the indentation consists of inconsistent tabs and spaces.                                                      |
+        | SystemError            | Raised when the interpreter detects internal error.                                                                        |
+        | SystemExit             | Raised by the sys.exit() function.                                                                                         |
+        | TypeError              | Raised when a function or operation is applied to an object of an incorrect type.                                          |
+        | UnboundLocalError      | Raised when a reference is made to a local variable in a function or method, but no value has been bound to that variable. |
+        | UnicodeError           | Raised when a Unicode-related encoding or decoding error occurs.                                                           |
+        | UnicodeEncodeError     | Raised when a Unicode-related error occurs during encoding.                                                                |
+        | UnicodeDecodeError     | Raised when a Unicode-related error occurs during decoding.                                                                |
+        | UnicodeTranslateError  | Raised when a Unicode-related error occurs during translation.                                                             |
+        | ValueError             | Raised when a function gets an argument of correct type but improper value.                                                |
+        | ZeroDivisionError      | Raised when the second operand of a division or module operation is zero.                                                  |
 - **PATHLIB**
     - documentation: https://docs.python.org/3/library/pathlib.html#concrete-paths
     - `import pathlib`
@@ -97,6 +135,8 @@
         PurePosixPath('/etc').joinpath('init.d', 'apache2')
         PurePosixPath('/etc/init.d/apache2')
         ```
+    - passing as an argument:
+
 - **DESIGN PRINCIPLES**
     - When to use functions vs a class: Basically, if they share state/data
         
@@ -135,6 +175,7 @@
     ```
     
 - **SELENIUM**
+    - WebDriver docs: https://developer.mozilla.org/en-US/docs/Web/WebDriver
     - [WebElement docs](https://www.selenium.dev/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html?highlight=webelement#selenium.webdriver.remote.webelement)
     - Get an element: `driver.find_element_by_<method>`
     - Get element’s text: `element.text`
@@ -201,6 +242,20 @@
     with self.assertRaises(TypeError):
         sum() 
     ```
+
+## **== MOCKING ==**
+- pytest_mock
+    - resources
+        - this post giving an overview: https://changhsinlee.com/pytest-mock/
+        - this post showing how to mock a class with a method: https://myadventuresincoding.wordpress.com/2011/02/26/python-python-mock-cheat-sheet/
+    - mocking a class
+        - 
+
+
+
+
+
+
 
 # Error Troubleshooting
 
