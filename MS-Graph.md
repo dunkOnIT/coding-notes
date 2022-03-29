@@ -1,0 +1,13 @@
+- Finding the children of a drive in MS Graph
+    - First, find the site id 
+        - (site = space within a sharepoint, analogous to a team in MS Teams. when in sharepoint in browser, it is the string after /sites in your url. eg: {org-name}.sharepoint.com/sites/{site-name})
+        - call the `/sites` endpoint of the Graph API. search for the name of your site in the json list which is returned, as it seems each user gets their own site - so there might be a lot 
+        - the site id you're looking for is the value in the "id" field
+    - Then, find the drive id of the site drive
+        - API call url: `{graph-base-url}/sites/{your-site-id}/drive`
+        - The `site drive id` is the value in the "id" field of the JSON response
+    - Then, call the children of the drive id
+        - API call url: `{graph-base-url}/drive/{your-drive-id}/items/root/children
+        - This should return a JSON list of the different folders at the top-level (I think? not actually sure whether it would include subfolders) in your site's drive
+- Make request to a particular folder in a site drive:
+    - `{graph-base-url}/sites/{your-site-id}/drive/items/{id-of-folder}`
