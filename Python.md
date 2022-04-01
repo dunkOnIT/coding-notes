@@ -259,6 +259,14 @@
 
 ## **== PYTEST ==**
 
+- How to set up tests:
+    - Group tests in classes
+        - Both fixtures and methods take "self" as an argument
+    - Create a region for fixtures
+        - Can scope fixtures with `@pytest.fixture(scope="class")`
+        - At class level, a fixture needs to be marked, but then also inherited by the method wanting to use it I think? at least, this goes for classes that I want to use.
+    - 
+
 - Parameterising: Let's you define what is basically a dictionary/list of inputs that can be passed as an argument to a function - essentially letting you run the same test code with multiple inputs. This is huge.
     - NB: Values are passed as-is to tests, not multiple copies of the original. So if you have a dict for the first iteration of a test and that dict gets modified, the modified version (ie, the original reference) will be used for the subsequent (second and on) tests.
 - Fixtures: 

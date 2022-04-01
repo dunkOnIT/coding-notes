@@ -90,6 +90,12 @@
 
 ## PyMongo
 
+- **Linux Installation**
+    - Guide here: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+    - Running on localhost:
+        - Start mongodb process: `sudo systemctl start mongod`
+
+
 - **Basics**
 
     - connecting to instance: 
@@ -117,9 +123,8 @@
         # Querying stuff
         get_one_result = collection.find_one({"_id":<value>})
         get_many_results = collection.find({"_id":<value>}) # Can also pass a dict of parameters, which maps a key to a 0/1 - 0 means don't include, 1 means include. This is the 2nd argument of the function.
-
-
         ```
+
     - list collections: `mydb.list_collection_names()`
 
 # GENERAL RESOURCES
