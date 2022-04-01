@@ -1,5 +1,8 @@
 # General
 
+- **VIRTUAL ENVIRONMENTS**
+    - good article: https://realpython.com/intro-to-pyenv/#specifying-your-python-version
+    - stackexchange: https://stackoverflow.com/questions/52731543/how-to-use-properly-pyenv-and-venv
 - **PIP**
     - install from requirements.txt: `pip install -r requirements.txt`  
     - create requirements.txt: pipreqs
@@ -22,6 +25,7 @@
     - [Here’s something on docstrings](https://www.programiz.com/python-programming/docstrings)
 - **ENVIRONMENT VARIABLES**
     - [Artcile on how to set environment variables with python](https://able.bio/rhett/how-to-set-and-get-environment-variables-in-python--274rgt5) 
+    - NB: Install `python-decouple`, NOT `decouple`
 - **LOGGING**
     - [Socratica video explaning the basics](https://www.youtube.com/watch?v=g8nQ90Hk328)
     - [Documentation](https://docs.python.org/3/howto/logging.html#logging-basic-tutorial)
@@ -34,6 +38,14 @@
             - [Full list of format variables](https://docs.python.org/3/library/logging.html#logrecord-attributes)
         - [Displaying the date/time in messages](https://docs.python.org/3/howto/logging.html#displaying-the-date-time-in-messages)
 - **STRING MANIPULATION**
+    - string formatting
+        - f-strings:
+            ```python
+            name = 'Tushar'
+            age = 23
+            print(f"Hello, My name is {name} and I'm {age} years old.")
+            ```
+
     - string.find(”string”)
         - `string.find(value, start, end)`
             - *`start` and `end` are optional, default to 0 and end of string respectively*
@@ -217,7 +229,7 @@
 
 ## **== UNIT TESTS==**
 
-- **UNITTEST**
+- **UNITTEST (DON'T USE THIS - PYTEST INSTEAD!**
   - `import unittest`
   - tests go into a class as methods
     - uses `assertEqual(<test_statement>, <expected_result>, <error text>)`
@@ -242,6 +254,58 @@
     with self.assertRaises(TypeError):
         sum() 
     ```
+
+
+
+## **== PYTEST ==**
+
+- Parameterising: Let's you define what is basically a dictionary/list of inputs that can be passed as an argument to a function - essentially letting you run the same test code with multiple inputs. This is huge.
+    - NB: Values are passed as-is to tests, not multiple copies of the original. So if you have a dict for the first iteration of a test and that dict gets modified, the modified version (ie, the original reference) will be used for the subsequent (second and on) tests.
+- Fixtures: 
+    - Fixtures can be overridden, leading to flexible behaviour? still need to see an example of this.
+    - Fixtures can also be parameterised, which sounds wild/powerful/confusing
+
+- 5x best practices: https://www.nerdwallet.com/blog/engineering/5-pytest-best-practices/
+    - **Prefer mocker over mock**: I already do this, just need to document how to do it lol.
+    - **Parametrize the same behavior, have different tests for different behaviors**:
+        - If I expect a bunch of tests to all fail, those should be parameterised and run together. 
+        - Don't try and parameterise things that will give different results.
+    - **Don’t modify fixture values in other fixtures**
+        - Modifying fixtures can lead to dependent fixtures returning unexpected results.
+        - "Use `deepcopy` instead" - look into deepcopy if I find myself needing to do this
+    - **Prefer responses over mocking outbound HTTP requests**
+        - Might be worth checking out for Anuva
+    - **Prefer tmpdir over global test artifacts**
+        - Pytest module that seems really useful instead of having billions of different files lying around: https://docs.pytest.org/en/6.2.x/tmpdir.html
+        - Syntax example:
+            ```python
+            import pytest
+
+            def process_file(fp):
+                """Toy function that returns an array of line lengths."""
+                return [len(l.strip()) for l in fp.readlines()]
+
+
+            @pytest.mark.parametrize("filename, expected", [
+                ("first.txt", [3, 3, 3]),
+                ("second.txt", [5, 5]),
+            ])
+            def test_antipattern(filename, expected):
+                with open("resources/" + filename) as fp:
+                    assert process_file(fp) == expected
+
+
+            @pytest.mark.parametrize("contents, expected", [
+                ("foo\nbar\nbaz", [3, 3, 3]),
+                ("hello\nworld", [5, 5]),
+            ])
+            def test_pattern(tmpdir, contents, expected):
+                tmp_file = tmpdir.join("testfile.txt")
+                tmp_file.write(contents)
+                with tmp_file.open() as fp:
+                    assert process_file(fp) == expected
+            ```
+
 
 ## **== MOCKING ==**
 - pytest_mock

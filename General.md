@@ -83,3 +83,45 @@
 
 
 ## Something
+
+# MongoDB/Pymongo
+
+## MongoDB
+
+## PyMongo
+
+- **Basics**
+
+    - connecting to instance: 
+        ```python
+        from pymongo import MongoClient
+
+        # Connecting to db instance
+        client = MongoClient("mongodb+srv://username:pass@url")
+
+        # Getting a database
+        database = client["duncan-mongo-cluster"]
+
+        # Creating a collection 
+        collection = database["collection"] # Important: In MongoDB, a collection is not created until it gets content!
+
+        # Adding a document
+        dict_to_add = {"value1":"derp", "value2":"herp"}
+        result = collection.insert_one(dict_to_add) # Inserts the relevant value and returns an InstertedOneResult object, with the `inserted_id` field that gives a unique value.
+
+        # Adding multiple documents
+        list_of_dicts = [ dict1, dict2, dict3 ]
+        results_list = collection.insert_many(list_of_dicts) # Contains an `inserted_ids` list, which holds the ids of the inserted documents
+        # id can be specified with the "_id" key
+
+        # Querying stuff
+        get_one_result = collection.find_one({"_id":<value>})
+        get_many_results = collection.find({"_id":<value>}) # Can also pass a dict of parameters, which maps a key to a 0/1 - 0 means don't include, 1 means include. This is the 2nd argument of the function.
+
+
+        ```
+    - list collections: `mydb.list_collection_names()`
+
+# GENERAL RESOURCES
+
+- mock api server: beeceptor.com
