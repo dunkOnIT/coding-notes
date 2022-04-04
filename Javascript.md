@@ -12,15 +12,6 @@
 
 
 # GIT/GITHUB
-* **branch management:**
-  * create and switch to a new branch with `git checkout -b <branch-name>`
-  * switch to an existing branch with `git checkout <branch-name>`
-  * merge a branch:
-    1. commit and push all changes
-    1. switch into the branch you would like to merge into 
-    1. verify in correct branch
-    2. `git merge <branch-to-be-merged>`
-
 
 # JAVASCRIPT
 

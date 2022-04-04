@@ -8,6 +8,15 @@
     - `git config --global user.email "email"  >
 
 
+* **branch management:**
+  * create and switch to a new branch with `git checkout -b <branch-name>`
+  * switch to an existing branch with `git checkout <branch-name>`
+  * merge a branch:
+    1. commit and push all changes
+    1. switch into the branch you would like to merge into 
+    1. verify in correct branch
+    2. `git merge <branch-to-be-merged>`
+
 # SSH AND SCREEN 
 
 - CREATING SSH KEY
@@ -95,10 +104,11 @@
     - Running on localhost:
         - Start mongodb process: `sudo systemctl start mongod`
 
+when experssion: terminalProcessSupported || terminalWebExtensionContributedProfile
 
 - **Basics**
 
-    - connecting to instance: 
+    - basic usage: 
         ```python
         from pymongo import MongoClient
 
@@ -123,6 +133,16 @@
         # Querying stuff
         get_one_result = collection.find_one({"_id":<value>})
         get_many_results = collection.find({"_id":<value>}) # Can also pass a dict of parameters, which maps a key to a 0/1 - 0 means don't include, 1 means include. This is the 2nd argument of the function.
+
+        # Updating records
+        # documentation isn't suuuuper clear, but I think we can do the following:
+        collection.update(
+            {<search filter>},
+            {<method>:{key:value}},
+            upsert = True   
+        )
+        # methods seem to be `$set` to set a value as something, `$inc` to include (ie, add) a value. 
+        # I can also "upsert", to insert a value with the update value if it isn't found.
         ```
 
     - list collections: `mydb.list_collection_names()`
@@ -130,3 +150,12 @@
 # GENERAL RESOURCES
 
 - mock api server: beeceptor.com
+- database apis:
+    - https://hasura.io/: connects to a database and gives an api
+    - https://github.com/nocodb/nocodb: create an airtable-esque frontend on top of a SQL database
+
+# FUCKING CORS
+
+- When having an unresolved CORS issue: Spin up a `cors-anywhere` server on `heroku` and just proxy your requests through it to eliminate issues
+    - https://github.com/Rob--W/cors-anywhere
+    - https://getthekt.com/setup-your-own-cors-proxy-on-heroku/

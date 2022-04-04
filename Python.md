@@ -1,5 +1,7 @@
 # General
 
+- **MODULES AND IMPORTS**
+    - use `from . import <filename>` to import files in the same module, and have it work when called from other directories
 - **VIRTUAL ENVIRONMENTS**
     - good article: https://realpython.com/intro-to-pyenv/#specifying-your-python-version
     - stackexchange: https://stackoverflow.com/questions/52731543/how-to-use-properly-pyenv-and-venv
