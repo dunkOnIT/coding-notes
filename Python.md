@@ -2,6 +2,14 @@
 
 - **MODULES AND IMPORTS**
     - use `from . import <filename>` to import files in the same module, and have it work when called from other directories
+    - if you do this, you can't call a script directly with `python my_script.py` - you have to call it from the parent module instead
+        - make sure you're in the parent directory (`base_dir` in the below example)
+            - base_dir
+                - src
+                    - __init.py__
+                    - script1.py
+                    - script2.py
+        - to call `script2.py`, run `python -m src.script2.py` 
 - **VIRTUAL ENVIRONMENTS**
     - good article: https://realpython.com/intro-to-pyenv/#specifying-your-python-version
     - stackexchange: https://stackoverflow.com/questions/52731543/how-to-use-properly-pyenv-and-venv
